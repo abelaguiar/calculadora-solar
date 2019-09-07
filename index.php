@@ -126,31 +126,31 @@
                     // ** Arendondar valor apartir de uma função de KwP Bruto
 
                     $kwpBruto = $killowattsConsulmidosDia / $hsp;
-                    $kwpBrutoArrendondado = round($kwpBruto, 2);
+                    $kwpBrutoArrendondado = round($kwpBruto, 0, PHP_ROUND_HALF_UP);
 
                     // ** KwP Bruto * 1000 / 330 = Quantidade de Placas
                     // ** Arrendondar valor apartir de uma função de Quantidade de Placas
 
                     $quantidadePlacas = $kwpBruto * 100 / 330;
-                    $quantidadePlacasArrendondado = round($quantidadePlacas, 2);
+                    $quantidadePlacasArrendondado = round($quantidadePlacas, 0, PHP_ROUND_HALF_UP);
 
                     // ** Quantidade de Placas Arrendondado * 120% = Quantidade de Placas Final
                     // ** Arrendondar valor apartir de uma função de Quantidade de Placas Final
 
                     $quantidadePlacasFinal = $quantidadePlacasArrendondado * 1.20;
-                    $quantidadePlacasFinalArrendondado = round($quantidadePlacasFinal, 2);
+                    $quantidadePlacasFinalArrendondado = round($quantidadePlacasFinal, 0, PHP_ROUND_HALF_UP);
 
                     // ** Quantidade de Placas Arrendondado * 2.03 = Metros quadrados de placas
                     // ** Arrendondar valor apartir de uma função de Metros quadrados de placas
 
                     $metrosQuadradosPlacas = $quantidadePlacasArrendondado * 2.03;
-                    $metrosQuadradosPlacasArrendondado = round($metrosQuadradosPlacas, 2);
+                    $metrosQuadradosPlacasArrendondado = round($metrosQuadradosPlacas, 0, PHP_ROUND_HALF_UP);
 
                     // ** Quantidade de Placas Arrendondado Final * 2.03 = Metros quadrados de placas Final
                     // ** Arrendondar valor apartir de uma função de Metros quadrados de placas Final
 
                     $metrosQuadradosPlacasFinal = $quantidadePlacasFinalArrendondado * 2.03;
-                    $metrosQuadradosPlacasFinalArrendondado = round($metrosQuadradosPlacasFinal, 2);
+                    $metrosQuadradosPlacasFinalArrendondado = round($metrosQuadradosPlacasFinal, 0, PHP_ROUND_HALF_UP);
 
                     // ** KwP Arrendondado * {HSP} / 30 = Produção Mensal
                     // ** Produção Mensal * 12 = Produção Anual
@@ -175,7 +175,7 @@
                             </tr>
                             <tr>
                                 <td> Consumo  Mensal Estimado</td>
-                                <td class="bg-info text-white"><?= round($killowattsConsulmidosMes, 2); ?></td>
+                                <td class="bg-info text-white"><?= round($killowattsConsulmidosMes, 0, PHP_ROUND_HALF_UP); ?></td>
                                 <td class="bg-info text-white"></td>
                                 <td class="bg-success text-white">kWh</td>
                             </tr>
@@ -200,13 +200,13 @@
                             <tr>
                                 <td> Geração mensal de Energia Estimada</td>
                                 <td class="bg-info text-white"><?= round($producaoMensal, 2); ?></td>
-                                <td class="bg-info text-white"><?= round(($producaoMensal * 1.20), 2); ?></td>
+                                <td class="bg-info text-white"><?= round(($producaoMensal * 1.20), 0, PHP_ROUND_HALF_UP); ?></td>
                                 <td class="bg-success text-white">kWh</td>
                             </tr>
                             <tr>
                                 <td> Geração Anual de Energia Estimada</td>
                                 <td class="bg-info text-white"><?= round($producaoAnual, 2); ?></td>
-                                <td class="bg-info text-white"><?= round(($producaoAnual * 1.20), 2); ?></td>
+                                <td class="bg-info text-white"><?= round(($producaoAnual * 1.20), 0, PHP_ROUND_HALF_UP); ?></td>
                                 <td class="bg-success text-white">kWh</td>
                             </tr>
                         </tbody>
