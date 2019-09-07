@@ -49,9 +49,9 @@
                 <hr>
                 <form action="" method="post">
                     <div class="form-group">
-                        <label for="">Estado\Cidade</label>
+                        <label for="">Estado ou Cidade</label>
                         <br>
-                        <select name="estado_cidade" class="form-control select2">
+                        <select name="estado_cidade" class="form-control select2" required>
                             <option value="">Selecione</option>
                             <?php foreach ($estadosCidades as $id => $nome): ?>
                                 <option value="<?= $id; ?>" <?= !empty($_POST['estado_cidade']) ? 'selected' : ''; ?>>
@@ -62,8 +62,8 @@
                         <small class="form-text text-muted">Selecione um estado com cidade</small>
                     </div>
                     <div class="form-group">
-                        <label for="">Valor de Conta</label>
-                        <input type="text" name="valor_conta" id="valor_conta" class="form-control" value="<?= !empty($_POST['valor_conta']) ? $_POST['valor_conta'] : ''; ?>" placeholder="">
+                        <label for="">Valor de Conta em Reais</label>
+                        <input type="text" name="valor_conta" id="valor_conta" class="form-control" value="<?= !empty($_POST['valor_conta']) ? $_POST['valor_conta'] : ''; ?>" required>
                     </div>
                     <button type="submit" class="btn btn-primary">
                         Calcular
