@@ -54,7 +54,7 @@
                         <select name="estado_cidade" class="form-control select2" required>
                             <option value="">Selecione</option>
                             <?php foreach ($estadosCidades as $id => $nome): ?>
-                                <option value="<?= $id; ?>" <?= !empty($_POST['estado_cidade']) ? 'selected' : ''; ?>>
+                                <option value="<?= $id; ?>" <?= !empty($_POST['estado_cidade']) && $_POST['estado_cidade'] == $id ? 'selected' : ''; ?>>
                                     <?= $nome; ?>
                                 </option>
                             <?php endforeach; ?>
@@ -80,38 +80,38 @@
                     if (!empty($_POST)) {
 
                         $tabelaGeral = [
-                            1   => ['hsp' => 5.6 , 'valor_tarifa' => 0.698],
-                            2   => ['hsp' => 5.04, 'valor_tarifa' => 0.884],
-                            3   => ['hsp' => 5.54, 'valor_tarifa' => 0.828],
-                            4   => ['hsp' => 5.66, 'valor_tarifa' => 0.674], 
-                            5   => ['hsp' => 5.51, 'valor_tarifa' => 0.646],
-                            6   => ['hsp' => 5.46, 'valor_tarifa' => 0.732],
-                            7   => ['hsp' => 5.22, 'valor_tarifa' => 0.716],
-                            8   => ['hsp' => 5.50, 'valor_tarifa' => 0.694],
-                            9   => ['hsp' => 5.36, 'valor_tarifa' => 0.754],
-                            10  => ['hsp' => 4.42, 'valor_tarifa' => 0.847], 
-                            11  => ['hsp' => 4.54, 'valor_tarifa' => 0.788], 
-                            12  => ['hsp' => 4.87, 'valor_tarifa' => 0.794], 
-                            13  => ['hsp' => 4.86, 'valor_tarifa' => 0.877], 
-                            14  => ['hsp' => 5.17, 'valor_tarifa' => 0.831], 
-                            15  => ['hsp' => 4.48, 'valor_tarifa' => 0.714], 
-                            16  => ['hsp' => 4.56, 'valor_tarifa' => 0.821], 
-                            17  => ['hsp' => 5.25, 'valor_tarifa' => 0.634], 
-                            18  => ['hsp' => 5.26, 'valor_tarifa' => 0.648], 
-                            19  => ['hsp' => 5.11, 'valor_tarifa' => 0.803], 
-                            21  => ['hsp' => 5.0 , 'valor_tarifa' => 0.738],
-                            22  => ['hsp' => 4.42, 'valor_tarifa' => 0.606],
+                            1   => ['hsp' => 5.6 , 'valor_tarifa' => 0.69],
+                            2   => ['hsp' => 5.04, 'valor_tarifa' => 0.88],
+                            3   => ['hsp' => 5.54, 'valor_tarifa' => 0.82],
+                            4   => ['hsp' => 5.66, 'valor_tarifa' => 0.67], 
+                            5   => ['hsp' => 5.51, 'valor_tarifa' => 0.64],
+                            6   => ['hsp' => 5.46, 'valor_tarifa' => 0.73],
+                            7   => ['hsp' => 5.22, 'valor_tarifa' => 0.71],
+                            8   => ['hsp' => 5.50, 'valor_tarifa' => 0.69],
+                            9   => ['hsp' => 5.36, 'valor_tarifa' => 0.75],
+                            10  => ['hsp' => 4.42, 'valor_tarifa' => 0.84], 
+                            11  => ['hsp' => 4.54, 'valor_tarifa' => 0.78], 
+                            12  => ['hsp' => 4.87, 'valor_tarifa' => 0.79], 
+                            13  => ['hsp' => 4.86, 'valor_tarifa' => 0.87], 
+                            14  => ['hsp' => 5.17, 'valor_tarifa' => 0.83], 
+                            15  => ['hsp' => 4.48, 'valor_tarifa' => 0.71], 
+                            16  => ['hsp' => 4.56, 'valor_tarifa' => 0.82], 
+                            17  => ['hsp' => 5.25, 'valor_tarifa' => 0.63], 
+                            18  => ['hsp' => 5.26, 'valor_tarifa' => 0.64], 
+                            19  => ['hsp' => 5.11, 'valor_tarifa' => 0.80], 
+                            21  => ['hsp' => 5.0 , 'valor_tarifa' => 0.73],
+                            22  => ['hsp' => 4.42, 'valor_tarifa' => 0.60],
                             23  => ['hsp' => 4.70, 'valor_tarifa' => 0.81],
-                            24  => ['hsp' => 4.96, 'valor_tarifa' => 0.667],
+                            24  => ['hsp' => 4.96, 'valor_tarifa' => 0.66],
                             25  => ['hsp' => 5.13, 'valor_tarifa' => 0.77],
-                            26  => ['hsp' => 4.20, 'valor_tarifa' => 0.607],
-                            27  => ['hsp' => 4.38, 'valor_tarifa' => 0.504], 
-                            28  => ['hsp' => 4.25, 'valor_tarifa' => 0.445]
+                            26  => ['hsp' => 4.20, 'valor_tarifa' => 0.60],
+                            27  => ['hsp' => 4.38, 'valor_tarifa' => 0.50], 
+                            28  => ['hsp' => 4.25, 'valor_tarifa' => 0.44]
                         ];
 
                     $estadoCidadeId = $_POST['estado_cidade'];
-                    $formataValorConta = str_replace('.', '', $_POST['valor_conta']);
-                    $valorConta = str_replace(',', '.', $formataValorConta);
+                    //$formataValorConta = str_replace('.', '', $_POST['valor_conta']);
+                    $valorConta = str_replace(',', '.', $_POST['valor_conta']);
 
                     $valorTarifa = $tabelaGeral[$estadoCidadeId]['valor_tarifa'];
                     $hsp = $tabelaGeral[$estadoCidadeId]['hsp'];
@@ -126,36 +126,36 @@
                     // ** Arendondar valor apartir de uma função de KwP Bruto
 
                     $kwpBruto = $killowattsConsulmidosDia / $hsp;
-                    $kwpBrutoArrendondado = round($kwpBruto, 0, PHP_ROUND_HALF_UP);
+                    $kwpBrutoArrendondado = round($kwpBruto, 1, PHP_ROUND_HALF_UP);
 
                     // ** KwP Bruto * 1000 / 330 = Quantidade de Placas
                     // ** Arrendondar valor apartir de uma função de Quantidade de Placas
 
-                    $quantidadePlacas = $kwpBruto * 100 / 330;
-                    $quantidadePlacasArrendondado = round($quantidadePlacas, 0, PHP_ROUND_HALF_UP);
+                    $quantidadePlacas = ($kwpBruto * 1000) / 330;
+                    $quantidadePlacasArrendondado = ceil($quantidadePlacas);
 
                     // ** Quantidade de Placas Arrendondado * 120% = Quantidade de Placas Final
                     // ** Arrendondar valor apartir de uma função de Quantidade de Placas Final
 
                     $quantidadePlacasFinal = $quantidadePlacasArrendondado * 1.20;
-                    $quantidadePlacasFinalArrendondado = round($quantidadePlacasFinal, 0, PHP_ROUND_HALF_UP);
+                    $quantidadePlacasFinalArrendondado = ceil($quantidadePlacasFinal);
 
                     // ** Quantidade de Placas Arrendondado * 2.03 = Metros quadrados de placas
                     // ** Arrendondar valor apartir de uma função de Metros quadrados de placas
 
                     $metrosQuadradosPlacas = $quantidadePlacasArrendondado * 2.03;
-                    $metrosQuadradosPlacasArrendondado = round($metrosQuadradosPlacas, 0, PHP_ROUND_HALF_UP);
+                    $metrosQuadradosPlacasArrendondado = ceil($metrosQuadradosPlacas);
 
                     // ** Quantidade de Placas Arrendondado Final * 2.03 = Metros quadrados de placas Final
                     // ** Arrendondar valor apartir de uma função de Metros quadrados de placas Final
 
                     $metrosQuadradosPlacasFinal = $quantidadePlacasFinalArrendondado * 2.03;
-                    $metrosQuadradosPlacasFinalArrendondado = round($metrosQuadradosPlacasFinal, 0, PHP_ROUND_HALF_UP);
+                    $metrosQuadradosPlacasFinalArrendondado = ceil($metrosQuadradosPlacasFinal);
 
                     // ** KwP Arrendondado * {HSP} / 30 = Produção Mensal
                     // ** Produção Mensal * 12 = Produção Anual
 
-                    $producaoMensal = $kwpBrutoArrendondado * $hsp; 
+                    $producaoMensal = $kwpBrutoArrendondado * $hsp * 30; 
                     $producaoAnual = $producaoMensal * 12; 
                 ?>
                     <table class="table table-bordered">
@@ -175,7 +175,7 @@
                             </tr>
                             <tr>
                                 <td> Consumo  Mensal Estimado</td>
-                                <td class="bg-info text-white"><?= round($killowattsConsulmidosMes, 0, PHP_ROUND_HALF_UP); ?></td>
+                                <td class="bg-info text-white"><?= round($killowattsConsulmidosMes, 1, PHP_ROUND_HALF_UP); ?></td>
                                 <td class="bg-info text-white"></td>
                                 <td class="bg-success text-white">kWh</td>
                             </tr>
@@ -200,13 +200,13 @@
                             <tr>
                                 <td> Geração mensal de Energia Estimada</td>
                                 <td class="bg-info text-white"><?= round($producaoMensal, 2); ?></td>
-                                <td class="bg-info text-white"><?= round(($producaoMensal * 1.20), 0, PHP_ROUND_HALF_UP); ?></td>
+                                <td class="bg-info text-white"><?= round(($producaoMensal * 1.20), 1, PHP_ROUND_HALF_UP); ?></td>
                                 <td class="bg-success text-white">kWh</td>
                             </tr>
                             <tr>
                                 <td> Geração Anual de Energia Estimada</td>
                                 <td class="bg-info text-white"><?= round($producaoAnual, 2); ?></td>
-                                <td class="bg-info text-white"><?= round(($producaoAnual * 1.20), 0, PHP_ROUND_HALF_UP); ?></td>
+                                <td class="bg-info text-white"><?= round(($producaoAnual * 1.20), 1, PHP_ROUND_HALF_UP); ?></td>
                                 <td class="bg-success text-white">kWh</td>
                             </tr>
                         </tbody>
