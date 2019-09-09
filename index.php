@@ -109,9 +109,17 @@
                             28  => ['hsp' => 4.25, 'valor_tarifa' => 0.44]
                         ];
 
+                    if(!function_exists('ceiling') )
+                    {
+                        function ceiling($number, $significance = 1)
+                        {
+                            return ( is_numeric($number) && is_numeric($significance) ) ? (ceil($number/$significance)*$significance) : false;
+                        }
+                    }
+
                     $estadoCidadeId = $_POST['estado_cidade'];
                     //$formataValorConta = str_replace('.', '', $_POST['valor_conta']);
-                    $valorConta = str_replace(',', '.', $_POST['valor_conta']);
+                    $valorConta = $_POST['valor_conta'];
 
                     $valorTarifa = $tabelaGeral[$estadoCidadeId]['valor_tarifa'];
                     $hsp = $tabelaGeral[$estadoCidadeId]['hsp'];
@@ -126,7 +134,7 @@
                     // ** Arendondar valor apartir de uma função de KwP Bruto
 
                     $kwpBruto = $killowattsConsulmidosDia / $hsp;
-                    $kwpBrutoArrendondado = round($kwpBruto, 1, PHP_ROUND_HALF_UP);
+                    $kwpBrutoArrendondado = round(ceiling($kwpBruto, 0.05), 1, PHP_ROUND_HALF_UP);
 
                     // ** KwP Bruto * 1000 / 330 = Quantidade de Placas
                     // ** Arrendondar valor apartir de uma função de Quantidade de Placas
@@ -224,7 +232,7 @@
         $(document).ready(function() {
             $('.select2').select2();
 
-            $('#valor_conta').mask("#.##0,00", {reverse: true});
+            $('#valor_conta').mask("###0.00", {reverse: true});
         });
     </script>
 </body>
